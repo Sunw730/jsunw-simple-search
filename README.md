@@ -72,11 +72,11 @@ Map<String, Object> hqlParam = hqlContext.getParam();
 ```
 
 # 方法细用
-* SearchUtil.toParamMap(Object object)
+* SearchUtil.toParamMap(Object object)<br>
 该方法将任意类型实例转成Map对象，如果object == null则返回空HashMap<String, Object>;
-* addSearchQuery(String query, String paramName, Object paramValue)
+* addSearchQuery(String query, String paramName, Object paramValue)<br>
 SearchContext实例中提供此方法，用于动态添加一个and条件匹配
-* addOrderString(String query)
+* addOrderString(String query)<br>
 SearchContext实例中提供此方法，用于动态添加一个排序条件，目前仅支持低优先级排序条件追加，不支持高优先级排序条件添加
 
 
