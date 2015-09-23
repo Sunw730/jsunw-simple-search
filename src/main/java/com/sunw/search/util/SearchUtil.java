@@ -183,7 +183,6 @@ public class SearchUtil {
 
     /**
      * 将对象转换成Map
-     *
      * @param obj
      * @return
      */
@@ -213,17 +212,17 @@ public class SearchUtil {
                     try {
                         if (Modifier.isProtected(modifiers) || Modifier.isPublic(modifiers)) {
                             fieldValue = field.get(obj);
-                            if (fieldValue != null) map.put(fieldName, field.get(obj)); //可继承属性
-                        } else if (fieldName.toLowerCase().startsWith("is")
+                            if(fieldValue != null) map.put(fieldName, field.get(obj)); //可继承属性
+                        } else if(fieldName.toLowerCase().startsWith("is")
                                 && (boolean.class.equals(fieldType) || Boolean.class.equals(fieldType))) {
                             fieldValue = cur.getMethod(fieldName).invoke(obj);
-                            if (fieldValue != null) {
+                            if(fieldValue != null) {
                                 map.put(fieldName, fieldValue);
                             }
                         } else {
                             //私有属性
                             fieldValue = new PropertyDescriptor(fieldName, cur).getReadMethod().invoke(obj);
-                            if (fieldValue != null) map.put(fieldName, fieldValue);
+                            if(fieldValue != null) map.put(fieldName, fieldValue);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

@@ -20,10 +20,69 @@ sunw-simple-search是一款根据class属性的注解配置来动态生成查询
 * 支持按参数生成SQL语句（对于没有传递参数值的属性字段，不会参与SQL生成）
 * 支持HQL和SQL两种条件生成方式
 
+# 注解说明
+所有注解字段，当且仅当传递了对应参数且参数值不为空时（不需要参数值的匹配方式除外，例如NN(is not null)），该字段才会参与生成查询语句
+
+# 条件匹配
+
+* @Search
+单条件匹配，可以通过注解属性配置匹配方式（type）、匹配分组（group，默认分组DefaultSearchGroup.class）
+```
+//表示username以like方式模糊匹配，所属分组有DefaultSearchGroup和FirstSearchGroup
+@Search(type = SearchType.LK, group = {DefaultSearchGroup.class, FirstSearchGroup.class})
+private String username;
+```
+
+* @Searches(searches = {})
+多条件匹配，可以通过使一个字段进行多条件匹配，searches属性值为@Search数组<br>
+当进行区间匹配时，需要对区间两个极端值进行区分，这个时候就用到了suffix属性，suffix表示参数名后缀，例如：
+```
+//表示查询年龄在某个区间的数据，此时传递的age最大值参数名必须为 age_le, 最小值参数名必须为 age_ge
+@Searches(searches = {@Search(type = SearchType.GE, suffix = "ge"), @Search(type = SearchType.LE, suffix = "le")})
+private int age;
+```
+
+# 排序
+* @Order
+排序语句，可以通过属性配置排序方式（type），排序优先级（sort，值越小，优先级越高）
+```
+//此配置最后生成语句为: order by age asc, id desc
+@Order(type = OrderType.ASC, sort = 1)
+private int age;
+@Order(type = OrderType.DESC, sort = 2)
+private long id;
+```
+
+* SearchUtil和SearchContext类
+SearchContext为查询环境，封装了查询语句和查询参数，SearchUtil为工具类，用来生成查询环境
+```
+//object为参数对象，可以是任意Object类型或者Map类型，程序自动获取其类型，根据pojo的get方法取值，将object转成Map
+//生成SQL查询语句
+SearchContext sqlContext = SearchUtil.getSqlSearchContext(object);
+//获取sql语句
+String sql = sqlContext.getQueryString();
+//获取此sql的参数
+Map<String, Object> sqlParam = sqlContext.getParam();
+//生成HQL查询语句
+SearchContext hqlContext = SearchUtil.getSqlSearchContext(object);
+//获取hql语句
+String hql = hqlContext.getQueryString();
+//获取hql查询参数
+Map<String, Object> hqlParam = hqlContext.getParam();
+```
+
+# 方法细用
+* SearchUtil.toParamMap(Object object)
+该方法将任意类型实例转成Map对象，如果object == null则返回空HashMap<String, Object>;
+* addSearchQuery(String query, String paramName, Object paramValue)
+SearchContext实例中提供此方法，用于动态添加一个and条件匹配
+* addOrderString(String query)
+SearchContext实例中提供此方法，用于动态添加一个排序条件，目前仅支持低优先级排序条件追加，不支持高优先级排序条件添加
+
+
 # Copyright
 Copyright 2015 Sun Wang under [GNU GENERAL PUBLIC LICENSE Version 2, June 1991](LISENSE).
 
-# 代码整理中，敬请期待....
 
 
 
