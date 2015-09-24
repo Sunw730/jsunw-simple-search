@@ -4,7 +4,6 @@
 package com.sunw.search.bean;
 
 import com.sunw.search.util.SearchUtil;
-import com.sunw.search.util.support.SearchSupportUtil;
 import org.junit.Test;
 
 import java.util.Map;
