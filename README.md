@@ -22,21 +22,21 @@ sunw-simple-search是一款根据class属性的注解配置来动态生成查询
  
 # Maven依赖
 * 仓库配置
-```
-  <repositories>
-      <repository>
-          <id>sunw-maven-repo</id>
-          <url>https://github.com/Sunw730/sunw-mvn-repo/master/public</url>
-      </repository>
-  </repositories>
+```xml
+    <repositories>
+        <repository>
+            <id>sunw-maven-repo</id>
+            <url>https://github.com/Sunw730/sunw-mvn-repo/master/public</url>
+        </repository>
+    </repositories>
 ```
 * 依赖配置
-```
-  <dependency>
-      <groupId>com.sunw</groupId>
-      <artifactId>sunw-simple-search</artifactId>
-      <version>1.0-SNAPSHOT</version>
-  </dependency>
+```xml
+    <dependency>
+        <groupId>com.sunw</groupId>
+        <artifactId>sunw-simple-search</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
 ```
 
 # 注解说明
