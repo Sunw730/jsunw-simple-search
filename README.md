@@ -19,6 +19,25 @@ sunw-simple-search是一款根据class属性的注解配置来动态生成查询
 * 支持表字段映射，能解决类属性与数据库字段不一致的情况
 * 支持按参数生成SQL语句（对于没有传递参数值的属性字段，不会参与SQL生成）
 * 支持HQL和SQL两种条件生成方式
+ 
+# Maven依赖
+* 仓库配置
+```
+  <repositories>
+      <repository>
+          <id>sunw-maven-repo</id>
+          <url>https://github.com/Sunw730/sunw-mvn-repo/master/public</url>
+      </repository>
+  </repositories>
+```
+* 依赖配置
+```
+  <dependency>
+      <groupId>com.sunw</groupId>
+      <artifactId>sunw-simple-search</artifactId>
+      <version>1.0-SNAPSHOT</version>
+  </dependency>
+```
 
 # 注解说明
 所有注解字段，当且仅当传递了对应参数且参数值不为空时（不需要参数值的匹配方式除外，例如NN(is not null)），该字段才会参与生成查询语句
