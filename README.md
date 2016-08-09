@@ -34,8 +34,8 @@ sunw-simple-search是一款根据class属性的注解配置来动态生成查询
 * 依赖配置
 ```xml
     <dependency>
-        <groupId>com.sunw</groupId>
-        <artifactId>sunw-simple-search</artifactId>
+        <groupId>com.jsunw</groupId>
+        <artifactId>jsunw-simple-search</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
 ```
